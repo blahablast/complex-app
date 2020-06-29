@@ -1,10 +1,24 @@
 import React from "react"
-import Container from "./Container"
+import Page from "./Page"
+import Axios from "axios"
 
 const HomeGuest = () => {
+  async function onSubmit(e) {
+    e.preventDefault()
+    try {
+      await Axios.post("http://localhost:5000/register", {
+        username: "test2",
+        email: "test2@test.com",
+        password: "qwerty123456"
+      })
+      console.log("User was successfully created")
+    } catch (err) {
+      console.log("There was an error")
+    }
+  }
   return (
     <div>
-      <Container wide={true}>
+      <Page title="Welcome!" wide={true}>
         <div className="row align-items-center">
           <div className="col-lg-7 py-3 py-md-5">
             <h1 className="display-3">Remember Writing?</h1>
@@ -16,7 +30,7 @@ const HomeGuest = () => {
             </p>
           </div>
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-            <form>
+            <form onSubmit={onSubmit}>
               <div className="form-group">
                 <label htmlFor="username-register" className="text-muted mb-1">
                   <small>Username</small>
@@ -64,7 +78,7 @@ const HomeGuest = () => {
             </form>
           </div>
         </div>
-      </Container>
+      </Page>
     </div>
   )
 }
