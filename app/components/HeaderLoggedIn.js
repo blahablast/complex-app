@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
+import ExampleContext from "../ExampleContext"
 
 const HeaderLoggedIn = props => {
+  const { setLoggedIn } = useContext(ExampleContext)
+
   const onClick = () => {
-    props.setLoggedIn(false)
+    setLoggedIn(false)
     localStorage.removeItem("token")
     localStorage.removeItem("username")
     localStorage.removeItem("avatar")
