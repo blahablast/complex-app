@@ -1,15 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import Page from "./Page"
 import Axios from "axios"
 
 const HomeGuest = () => {
-  async function onSubmit(e) {
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  const onSubmit = async e => {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:5000/register", {
-        username: "test2",
-        email: "test2@test.com",
-        password: "qwerty123456"
+      await Axios.post("/register", {
+        username,
+        email,
+        password
       })
       console.log("User was successfully created")
     } catch (err) {
@@ -36,6 +40,7 @@ const HomeGuest = () => {
                   <small>Username</small>
                 </label>
                 <input
+                  onChange={e => setUsername(e.target.value)}
                   id="username-register"
                   name="username"
                   className="form-control"
@@ -49,6 +54,7 @@ const HomeGuest = () => {
                   <small>Email</small>
                 </label>
                 <input
+                  onChange={e => setEmail(e.target.value)}
                   id="email-register"
                   name="email"
                   className="form-control"
@@ -62,6 +68,7 @@ const HomeGuest = () => {
                   <small>Password</small>
                 </label>
                 <input
+                  onChange={e => setPassword(e.target.value)}
                   id="password-register"
                   name="password"
                   className="form-control"
