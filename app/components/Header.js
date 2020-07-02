@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import HeaderLoggedOut from "./HeaderLoggedOut"
 import HeaderLoggedIn from "./HeaderLoggedIn"
+import StateContext from "../StateContext"
 
 const Header = props => {
+  const appState = useContext(StateContext)
+
   return (
     <div>
       <header className="header-bar bg-primary mb-3">
@@ -13,7 +16,7 @@ const Header = props => {
               ComplexApp
             </Link>
           </h4>
-          {props.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+          {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
         </div>
       </header>
     </div>

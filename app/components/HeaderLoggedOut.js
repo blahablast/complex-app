@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react"
 import Axios from "axios"
-import ExampleContext from "../ExampleContext"
+import DispatchContext from "../DispatchContext"
 
 const HeaderLoggedOut = props => {
-  const { setLoggedIn } = useContext(ExampleContext)
+  const appDispatch = useContext(DispatchContext)
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
 
@@ -15,10 +15,7 @@ const HeaderLoggedOut = props => {
         password
       })
       if (res.data) {
-        localStorage.setItem("token", res.data.token)
-        localStorage.setItem("username", res.data.username)
-        localStorage.setItem("avatar", res.data.avatar)
-        setLoggedIn(true)
+        appDispatch({ type: "login", data: Response.data })
       } else {
         console.log("Incorrect username or password")
       }

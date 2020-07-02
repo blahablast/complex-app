@@ -1,15 +1,14 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
-import ExampleContext from "../ExampleContext"
+import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 const HeaderLoggedIn = props => {
-  const { setLoggedIn } = useContext(ExampleContext)
+  const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   const onClick = () => {
-    setLoggedIn(false)
-    localStorage.removeItem("token")
-    localStorage.removeItem("username")
-    localStorage.removeItem("avatar")
+    appDispatch({ type: "logout" })
   }
 
   return (
@@ -22,10 +21,7 @@ const HeaderLoggedIn = props => {
         <span className="chat-count-badge text-white"> </span>
       </span>
       <a href="#" className="mr-2">
-        <img
-          className="small-header-avatar"
-          src={localStorage.getItem("avatar")}
-        />
+        <img className="small-header-avatar" src={appState.user.avatar} />
       </a>
       <Link className="btn btn-sm btn-success mr-2" to="/create-post">
         Create Post
