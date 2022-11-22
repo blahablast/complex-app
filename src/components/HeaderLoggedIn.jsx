@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function HeaderLoggedIn({ setLoggedIn }) {
   const handleLogout = () => {
     setLoggedIn(false)
@@ -21,9 +23,9 @@ function HeaderLoggedIn({ setLoggedIn }) {
           src={localStorage.getItem('complexappAvatar')}
         />
       </a>
-      <a className='btn btn-sm btn-success mr-2' href='/create-post'>
+      <Link className='btn btn-sm btn-success mr-2' to='/create-post'>
         Create Post
-      </a>
+      </Link>
       <button onClick={handleLogout} className='btn btn-sm btn-secondary'>
         Sign Out
       </button>
