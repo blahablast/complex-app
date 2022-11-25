@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import Page from './Page'
 import Axios from 'axios'
 import DispatchContext from '../DispatchContext'
+import StateContext from '../StateContext'
 
 function CreatePost() {
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
   const navigate = useNavigate()
   const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -17,7 +19,7 @@ function CreatePost() {
       const response = await Axios.post('/create-post', {
         title,
         body,
-        token: localStorage.getItem('complexappToken')
+        token: appState.user.token
       })
       // Redirect to new post URL
       appDispatch({
